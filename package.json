@@ -13,7 +13,11 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "proxy": "ng serve --proxy-config proxy.conf.json",
+    "server": "json-server --watch db/db.json --routes routes/routes.json",
+    "init": "concurrently --kill-others \"npm run proxy\" \"npm run server\""
+
   },
   "private": true,
   "dependencies": {
@@ -25,6 +29,8 @@
     "@angular/platform-browser": "~11.1.1",
     "@angular/platform-browser-dynamic": "~11.1.1",
     "@angular/router": "~11.1.1",
+    "concurrently": "^5.3.0",
+    "json-server": "^0.16.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

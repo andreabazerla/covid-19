@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+
+<h2>Menu</h2>
+<div>
+  <button routerLink="/login">Login</button>
+</div>
+
+<h3>Pandemia: {{ pandemia ? 'ON' : 'OFF' }}</h3>
+<h3>Vaccino: {{ vaccino ? 'ON' : 'OFF' }}</h3>
+
+<router-outlet></router-outlet>
