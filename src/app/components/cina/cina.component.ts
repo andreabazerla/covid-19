@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CinaService } from 'src/app/services/cina.service';
 
@@ -9,15 +9,23 @@ import { CinaService } from 'src/app/services/cina.service';
 })
 export class CinaComponent implements OnInit {
   pandemia: FormControl = new FormControl();
+  @Output() update = new EventEmitter<boolean>();
 
   constructor(private cinaService: CinaService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.cinaService.getPandemia().subscribe(
+      (res) => this.pandemia.setValue(res.pandemia)
+    );
+  }
 
-  updatePandemia(checkbox: any) {
-    this.cinaService.updatePandemia(checkbox.checked)
-      .subscribe(status => {
-        this.pandemia.setValue(status);
-      });
+  updatePandemia(checkbox: boolean) {
+    // console.log(checkbox);
+    this.cinaService.updatePandemia(checkbox).subscribe(
+      (res: any) => {
+        this.pandemia.setValue(res.pandemia);
+        this.update.emit(checkbox);
+      }
+    );
   }
 }

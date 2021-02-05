@@ -1,4 +1,4 @@
 <label>
   Pandemia:
-  <input type="checkbox" [formControl]="pandemia" #pandemiaCheckbox (click)="updatePandemia(pandemiaCheckbox)">
+  <input type="checkbox" [formControl]="pandemia" #pandemiaCheckbox (click)="updatePandemia(pandemiaCheckbox.checked)">
 </label>

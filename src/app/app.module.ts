@@ -13,18 +13,14 @@ import { CinaComponent } from './components/cina/cina.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    CinaComponent
-  ],
+  declarations: [AppComponent, LoginComponent, CinaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
