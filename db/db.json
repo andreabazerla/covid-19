@@ -1,5 +1,8 @@
 {
   "cina": {
     "pandemia": false
+  },
+  "pfizer": {
+    "vaccino": false
   }
 }

@@ -11,9 +11,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { CinaComponent } from './components/cina/cina.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PfizerComponent } from './components/pfizer/pfizer.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CinaComponent],
+  declarations: [AppComponent, LoginComponent, CinaComponent, PfizerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
