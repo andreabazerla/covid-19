@@ -1,6 +1,12 @@
 {
   "name": "covid19",
   "version": "0.0.0",
+  "license": "MIT",
+  "author": "Andrea Bazerla",
+  "engines": {
+    "node": "15.x",
+    "npm": "7.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
