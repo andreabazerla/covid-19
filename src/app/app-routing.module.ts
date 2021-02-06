@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
 import { CinaComponent } from './components/cina/cina.component';
+import { ConteComponent } from './components/conte/conte.component';
 import { LoginComponent } from './components/login/login.component';
 import { PfizerComponent } from './components/pfizer/pfizer.component';
 
@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'pfizer',
     component: PfizerComponent,
+  },
+  {
+    path: 'conte',
+    component: ConteComponent,
   }
 ];
 

@@ -1,8 +1,11 @@
 {
   "cina": {
-    "pandemia": false
+    "pandemia": true
   },
   "pfizer": {
     "vaccino": false
+  },
+  "conte": {
+    "zona": "rossa"
   }
 }
