@@ -6,6 +6,9 @@
     "vaccino": false
   },
   "conte": {
-    "zona": "rossa"
+    "zona": "arancione"
+  },
+  "cittadino": {
+    "mascherine": 0
   }
 }

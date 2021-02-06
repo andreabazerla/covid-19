@@ -13,6 +13,7 @@ import { CinaComponent } from './components/cina/cina.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PfizerComponent } from './components/pfizer/pfizer.component';
 import { ConteComponent } from './components/conte/conte.component';
+import { CittadinoComponent } from './components/cittadino/cittadino.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ConteComponent } from './components/conte/conte.component';
     CinaComponent,
     PfizerComponent,
     ConteComponent,
+    CittadinoComponent,
   ],
   imports: [
     BrowserModule,
