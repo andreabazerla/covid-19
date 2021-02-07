@@ -14,4 +14,10 @@ export class CittadinoService {
   getMascherine(): Observable<number> {
     return this.httpClient.get<number>(this.cittadinoUrl);
   }
+
+  updateMascherine(mascherine: number): Observable<number> {
+    return this.httpClient.post<number>(this.cittadinoUrl, {
+      mascherine,
+    });
+  }
 }

@@ -1,14 +1,14 @@
 {
   "cina": {
-    "pandemia": true
+    "pandemia": false
   },
   "pfizer": {
     "vaccino": false
   },
   "conte": {
-    "zona": "arancione"
+    "zona": "bianca"
   },
   "cittadino": {
-    "mascherine": 0
+    "mascherine": 1
   }
 }

@@ -17,3 +17,13 @@
   <span>{{ mascherine }}</span>
 </label>
 
+<br><br>
+
+Esci di casa:
+<form [formGroup]="outPLace">
+  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>Università</button>
+  <button type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>Farmacia</button>
+  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>Cane</button>
+  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>Ufficio</button>
+  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>Bar</button>
+</form>
