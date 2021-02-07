@@ -21,7 +21,6 @@ export class ConteComponent implements OnInit {
   updateZona(zona: string) {
     this.conteService.updateZona(zona).subscribe((res: any) => {
       this.zona.setValue(res.zona);
-      console.log(zona);
     });
   }
 }

@@ -20,7 +20,6 @@ export class CinaComponent implements OnInit {
   }
 
   updatePandemia(checkbox: boolean) {
-    // console.log(checkbox);
     this.cinaService.updatePandemia(checkbox).subscribe(
       (res: any) => {
         this.pandemia.setValue(res.pandemia);
