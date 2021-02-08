@@ -11,10 +11,10 @@ export class CittadinoService {
   constructor() {}
 
   getMascherine(): number {
-    return this.mascherine.value;
+    return this.mascherine.getValue();
   }
 
-  updateMascherine(value: number): void {
+  setMascherine(value: number): void {
     this.mascherine.next(value);
   }
 }

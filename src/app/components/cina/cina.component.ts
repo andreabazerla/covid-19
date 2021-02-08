@@ -19,11 +19,11 @@ export class CinaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pandemia.setValue(this.cinaService.getPandemia());
+    this.pandemia.setValue(this.cinaService.pandemia);
   }
 
-  updatePandemia(value: boolean) {
-    this.cinaService.updatePandemia(value);
+  setPandemia(value: boolean) {
+    this.cinaService.pandemia = value;
     this.pandemia.setValue(value);
     this.eventEmitter.emit(value);
     this.loggerService.addLog(`Cina: pandemia = ${value}`);

@@ -21,7 +21,7 @@ export class ConteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.cinaService.getPandemia()) {
+    if (!this.cinaService.pandemia) {
       this.zona.disable();
       this.zona.setValue('');
     } else {
@@ -39,8 +39,8 @@ export class ConteComponent implements OnInit {
     }
   }
 
-  updateZona(value: string) {
-    this.conteService.updateZona(value);
+  setZona(value: string) {
+    this.conteService.setZona(value);
     this.zona.setValue(value);
     this.loggerService.addLog(`Conte: zona = ${value}`);
   }

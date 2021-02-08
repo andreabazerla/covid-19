@@ -10,10 +10,10 @@ export class PfizerService {
   constructor() {}
 
   getVaccino(): boolean {
-    return this.vaccino.value;
+    return this.vaccino.getValue();
   }
 
-  updateVaccino(value: boolean): void {
+  setVaccino(value: boolean): void {
     this.vaccino.next(value);
   }
 }

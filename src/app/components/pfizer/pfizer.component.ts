@@ -20,7 +20,7 @@ export class PfizerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let pandemia = this.cinaService.getPandemia();
+    let pandemia = this.cinaService.pandemia;
     let vaccino = this.pfizerService.getVaccino();
 
     this.vaccino.setValue(vaccino);
@@ -34,9 +34,9 @@ export class PfizerComponent implements OnInit {
     }
   }
 
-  updateVaccino(value: boolean) {
+  setVaccino(value: boolean) {
     if (value) {
-      this.pfizerService.updateVaccino(value);
+      this.pfizerService.setVaccino(value);
       this.vaccino.setValue(value);
       this.eventEmitter.emit(value);
       this.loggerService.addLog(`Pfizer: vaccino = ${value}`);

@@ -5,15 +5,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CinaService {
-  pandemia = new BehaviorSubject<boolean>(false);
+  private readonly _pandemia = new BehaviorSubject<boolean>(false);
+  readonly pandemia$ = this._pandemia.asObservable();
 
   constructor() {}
 
-  getPandemia(): boolean {
-    return this.pandemia.value;
+  get pandemia(): boolean {
+    return this._pandemia.getValue();
   }
 
-  updatePandemia(value: boolean): void {
-    this.pandemia.next(value);
+  set pandemia(value: boolean) {
+    this._pandemia.next(value);
   }
 }

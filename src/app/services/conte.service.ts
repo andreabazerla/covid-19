@@ -10,10 +10,10 @@ export class ConteService {
   constructor() {}
 
   getZona(): string {
-    return this.zona.value;
+    return this.zona.getValue();
   }
 
-  updateZona(value: string): void {
+  setZona(value: string): void {
     return this.zona.next(value);
   }
 }

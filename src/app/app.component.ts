@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cinaService.pandemia.subscribe((res) => (this.pandemia = res));
+    this.cinaService.pandemia$.subscribe((res) => (this.pandemia = res));
     this.pfizerService.vaccino.subscribe((res) => (this.vaccino = res));
   }
 }
