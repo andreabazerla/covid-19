@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PfizerComponent } from './components/pfizer/pfizer.component';
 import { ConteComponent } from './components/conte/conte.component';
 import { CittadinoComponent } from './components/cittadino/cittadino.component';
+import { LoggerComponent } from './components/logger/logger.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CittadinoComponent } from './components/cittadino/cittadino.component';
     PfizerComponent,
     ConteComponent,
     CittadinoComponent,
+    LoggerComponent,
   ],
   imports: [
     BrowserModule,

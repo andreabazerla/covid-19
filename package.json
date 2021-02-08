@@ -17,7 +17,6 @@
     "proxy": "ng serve --proxy-config proxy.conf.json",
     "server": "json-server --watch db/db.json --routes routes/routes.json",
     "init": "concurrently --kill-others \"npm run proxy\" \"npm run server\""
-
   },
   "private": true,
   "dependencies": {

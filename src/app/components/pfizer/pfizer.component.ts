@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { LoggerService } from 'src/app/services/logger.service';
 import { PfizerService } from 'src/app/services/pfizer.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class PfizerComponent implements OnInit {
   vaccino: FormControl = new FormControl();
   @Output() update = new EventEmitter<boolean>();
 
-  constructor(private pfizerService: PfizerService) {}
+  constructor(
+    private pfizerService: PfizerService,
+    private loggerService: LoggerService
+  ) {}
 
   ngOnInit(): void {
     this.pfizerService
@@ -23,6 +27,7 @@ export class PfizerComponent implements OnInit {
     this.pfizerService.updateVaccino(checkbox).subscribe((res: any) => {
       this.vaccino.setValue(res.vaccino);
       this.update.emit(checkbox);
+      this.loggerService.log(`Pfizer: vaccino = ${res.vaccino}`).subscribe();
     });
   }
 }
