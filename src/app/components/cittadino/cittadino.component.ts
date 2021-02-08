@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { mergeMap } from 'rxjs/operators';
 import { CinaService } from 'src/app/services/cina.service';
 import { CittadinoService } from 'src/app/services/cittadino.service';
 import { ConteService } from 'src/app/services/conte.service';
@@ -12,6 +11,10 @@ import { PfizerService } from 'src/app/services/pfizer.service';
   styleUrls: ['./cittadino.component.scss'],
 })
 export class CittadinoComponent implements OnInit {
+  pandemia: boolean;
+  vaccino: boolean;
+  mascherine: number;
+
   zona: FormControl = new FormControl();
 
   outPLace = new FormGroup({
@@ -22,8 +25,6 @@ export class CittadinoComponent implements OnInit {
     bar: new FormControl(),
   });
 
-  mascherine: number;
-
   constructor(
     private conteService: ConteService,
     private cittadinoService: CittadinoService,
@@ -32,119 +33,106 @@ export class CittadinoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.conteService.getZona().subscribe((res) => {
-      this.zona.setValue(res.zona);
-      if (res.zona == 'arancione') {
-        this.outPLace.controls['bar'].disable();
-      } else if (res.zona == 'rossa') {
-        this.outPLace.controls['bar'].disable();
-        this.outPLace.controls['ufficio'].disable();
+    this.cinaService.pandemia.subscribe((res) => (this.pandemia = res));
+    this.pfizerService.vaccino.subscribe((res) => (this.vaccino = res));
+    this.cittadinoService.mascherine.subscribe(
+      (res) => (this.mascherine = res)
+    );
+
+    this.mascherine = this.cittadinoService.getMascherine();
+
+    if (this.pandemia) {
+      if (this.vaccino) {
+        this.zona.setValue('');
+        this.outPLace.controls['farmacia'].disable();
+      } else {
+        this.outPLace.controls['universita'].disable();
+        let zona = this.conteService.getZona();
+        if (zona === '') {
+          this.zona.setValue('gialla');
+        } else {
+          this.zona.setValue(zona);
+        }
+        if (this.zona.value === 'gialla') {
+          if (!this.mascherine) {
+            this.outPLace.controls['cane'].disable();
+            this.outPLace.controls['bar'].disable();
+            this.outPLace.controls['ufficio'].disable();
+          }
+        }
       }
-    });
+    } else {
+      this.zona.setValue('');
+      if (this.vaccino) {
+        this.outPLace.controls['farmacia'].disable();
+      }
+    }
     this.zona.disable();
 
-    this.cittadinoService
-      .getMascherine()
-      .subscribe((res: any) => (this.mascherine = res.mascherine));
-
-    this.cinaService
-      .getPandemia()
-      .pipe(
-        mergeMap((res: any) => {
-          if (!res.pandemia) return [];
-          return this.pfizerService.getVaccino();
-        })
-      )
-      .subscribe((res: any) => {
-        if (res !== undefined && !res.vaccino) {
-          this.outPLace.controls['universita'].disable();
-        }
-      });
+    if (this.zona.value === 'arancione') {
+      this.outPLace.controls['bar'].disable();
+    } else if (this.zona.value === 'rossa') {
+      this.outPLace.controls['bar'].disable();
+      this.outPLace.controls['ufficio'].disable();
+    }
   }
 
   goOut(): void {
-    this.cinaService
-      .getPandemia()
-      .pipe(
-        mergeMap((res: any) => {
-          if (!res.pandemia) return [];
-          return this.pfizerService.getVaccino();
-        })
-      )
-      .subscribe((res: any) => {
-        if (res !== undefined && !res.vaccino) {
-          this.consumeMascherine();
-        }
-      });
+    if (this.pandemia) {
+      if (!this.vaccino) {
+        return this.withMask();
+      } else {
+        return this.withoutMask();
+      }
+    } else {
+      return this.withoutMask();
+    }
   }
 
-  consumeMascherine() {
-    this.cittadinoService
-      .getMascherine()
-      .pipe(
-        mergeMap((res: any) => {
-          let mascherine = this.useMascherine(res.mascherine);
-          return this.cittadinoService.updateMascherine(mascherine);
-        })
-      )
-      .subscribe((res: any) => {
-        this.mascherine = res.mascherine;
-      });
+  withMask() {
+    this.useMask();
+  }
+
+  withoutMask() {}
+
+  useMask() {
+    let mascherine = this.cittadinoService.getMascherine();
+
+    if (mascherine > 0) {
+      mascherine -= 1;
+      this.cittadinoService.mascherine.next(mascherine);
+      if (mascherine === 0) {
+        if (this.pandemia && !this.vaccino) {
+          this.outPLace.controls['cane'].disable();
+          this.outPLace.controls['bar'].disable();
+          this.outPLace.controls['ufficio'].disable();
+        }
+      }
+    }
+  }
+
+  buyMask() {
+    let mascherine = this.cittadinoService.getMascherine();
+    mascherine += 10;
+    this.cittadinoService.mascherine.next(mascherine);
+    if (this.pandemia && !this.vaccino) {
+      this.outPLace.controls['cane'].enable();
+      if (this.zona.value === 'gialla') {
+        this.outPLace.controls['bar'].enable();
+        this.outPLace.controls['ufficio'].enable();
+      } else if (this.zona.value === 'arancione') {
+        this.outPLace.controls['ufficio'].enable();
+      }
+    }
   }
 
   goUniversita(): void {
-    this.cinaService
-      .getPandemia()
-      .pipe(
-        mergeMap((res: any) => {
-          if (!res.pandemia) return [];
-          return this.pfizerService.getVaccino();
-        })
-      )
-      .subscribe((res: any) => {
-        if (res !== undefined && !res.vaccino) {
-          this.cittadinoService
-            .getMascherine()
-            .pipe(
-              mergeMap((res: any) => {
-                let mascherine = this.useMascherine(res.mascherine);
-                return this.cittadinoService.updateMascherine(mascherine);
-              })
-            )
-            .subscribe((res: any) => {
-              this.mascherine = res.mascherine;
-            });
-        }
-      });
+    this.goOut();
   }
 
   goFarmacia(): void {
-    this.cinaService.getPandemia().subscribe((res: any) => {
-      if (res.pandemia) {
-        this.cittadinoService
-          .getMascherine()
-          .pipe(
-            mergeMap((res: any) => {
-              let mascherine = this.useMascherine(res.mascherine);
-              return this.cittadinoService.updateMascherine(mascherine);
-            })
-          )
-          .subscribe((res: any) => {
-            this.mascherine = res.mascherine;
-            this.cittadinoService
-              .getMascherine()
-              .pipe(
-                mergeMap((res: any) => {
-                  let mascherine = this.buyMascherine(res.mascherine);
-                  return this.cittadinoService.updateMascherine(mascherine);
-                })
-              )
-              .subscribe((res: any) => {
-                this.mascherine = res.mascherine;
-              });
-          });
-      }
-    });
+    this.goOut();
+    this.buyMask();
   }
 
   goCane() {
@@ -157,13 +145,5 @@ export class CittadinoComponent implements OnInit {
 
   goUfficio() {
     this.goOut();
-  }
-
-  useMascherine(mascherine: number): number {
-    return mascherine > 0 ? (mascherine = mascherine - 1) : 0;
-  }
-
-  buyMascherine(mascherine: number): number {
-    return (mascherine = mascherine + 10);
   }
 }

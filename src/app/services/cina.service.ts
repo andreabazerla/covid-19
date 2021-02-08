@@ -1,36 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CinaService {
-  private API: string = '/api/';
-  private cinaUrl: string = this.API + 'cina';
+  pandemia = new BehaviorSubject<boolean>(false);
 
-  private pandemia = new BehaviorSubject<boolean>(null);
-  pandemia$ = this.pandemia.asObservable();
+  constructor() {}
 
-  constructor(private httpClient: HttpClient) {
-    this.initPandemia();
+  getPandemia(): boolean {
+    return this.pandemia.value;
   }
 
-  initPandemia(): any {
-    return this.getPandemia().subscribe((res) => {
-      this.pandemia.next(res.pandemia);
-    });
-  }
-
-  getPandemia(): Observable<any> {
-    return this.httpClient.get<boolean>(this.cinaUrl);
-  }
-
-  updatePandemia(value: boolean): Observable<boolean> {
-    return this.httpClient
-      .post<boolean>(this.cinaUrl, { pandemia: value })
-      .pipe(tap((_) => this.pandemia.next(value)));
+  updatePandemia(value: boolean): void {
+    this.pandemia.next(value);
   }
 }

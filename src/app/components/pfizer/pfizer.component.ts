@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { CinaService } from 'src/app/services/cina.service';
 import { LoggerService } from 'src/app/services/logger.service';
 import { PfizerService } from 'src/app/services/pfizer.service';
 
@@ -10,24 +11,36 @@ import { PfizerService } from 'src/app/services/pfizer.service';
 })
 export class PfizerComponent implements OnInit {
   vaccino: FormControl = new FormControl();
-  @Output() update = new EventEmitter<boolean>();
+  @Output() eventEmitter = new EventEmitter<boolean>();
 
   constructor(
+    private cinaService: CinaService,
     private pfizerService: PfizerService,
     private loggerService: LoggerService
   ) {}
 
   ngOnInit(): void {
-    this.pfizerService
-      .getVaccino()
-      .subscribe((res) => this.vaccino.setValue(res.vaccino));
+    let pandemia = this.cinaService.getPandemia();
+    let vaccino = this.pfizerService.getVaccino();
+
+    this.vaccino.setValue(vaccino);
+
+    if (pandemia) {
+      if (vaccino) {
+        this.vaccino.disable();
+      }
+    } else {
+      this.vaccino.disable();
+    }
   }
 
-  updateVaccino(checkbox: boolean) {
-    this.pfizerService.updateVaccino(checkbox).subscribe((res: any) => {
-      this.vaccino.setValue(res.vaccino);
-      this.update.emit(checkbox);
-      this.loggerService.addLog(`Pfizer: vaccino = ${res.vaccino}`);
-    });
+  updateVaccino(value: boolean) {
+    if (value) {
+      this.pfizerService.updateVaccino(value);
+      this.vaccino.setValue(value);
+      this.eventEmitter.emit(value);
+      this.loggerService.addLog(`Pfizer: vaccino = ${value}`);
+      this.vaccino.disable();
+    }
   }
 }

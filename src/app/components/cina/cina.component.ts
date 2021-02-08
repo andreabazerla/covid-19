@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CinaService } from 'src/app/services/cina.service';
+import { ConteService } from 'src/app/services/conte.service';
 import { LoggerService } from 'src/app/services/logger.service';
 
 @Component({
@@ -10,24 +11,21 @@ import { LoggerService } from 'src/app/services/logger.service';
 })
 export class CinaComponent implements OnInit {
   pandemia: FormControl = new FormControl();
-  @Output() update = new EventEmitter<boolean>();
+  @Output() eventEmitter = new EventEmitter<boolean>();
 
   constructor(
     private cinaService: CinaService,
-    private loggerService: LoggerService
+    private loggerService: LoggerService,
   ) {}
 
   ngOnInit(): void {
-    this.cinaService
-      .getPandemia()
-      .subscribe((res) => this.pandemia.setValue(res.pandemia));
+    this.pandemia.setValue(this.cinaService.getPandemia());
   }
 
-  updatePandemia(checkbox: boolean) {
-    this.cinaService.updatePandemia(checkbox).subscribe((res: any) => {
-      this.pandemia.setValue(res.pandemia);
-      this.update.emit(checkbox);
-      this.loggerService.addLog(`Cina: pandemia = ${res.pandemia}`);
-    });
+  updatePandemia(value: boolean) {
+    this.cinaService.updatePandemia(value);
+    this.pandemia.setValue(value);
+    this.eventEmitter.emit(value);
+    this.loggerService.addLog(`Cina: pandemia = ${value}`);
   }
 }

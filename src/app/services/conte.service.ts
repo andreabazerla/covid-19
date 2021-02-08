@@ -1,21 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConteService {
-  private API: string = '/api/';
-  private conteUrl: string = this.API + 'conte';
+  zona = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
-  getZona(): Observable<any> {
-    return this.httpClient.get<boolean>(this.conteUrl);
+  getZona(): string {
+    return this.zona.value;
   }
 
-  updateZona(value: string): Observable<boolean> {
-    return this.httpClient.post<boolean>(this.conteUrl, { zona: value });
+  updateZona(value: string): void {
+    return this.zona.next(value);
   }
 }
