@@ -8,36 +8,16 @@ import { Log } from '../models/log';
   providedIn: 'root',
 })
 export class LoggerService {
-  private API: string = '/api/';
-  private loggerUrl: string = this.API + 'logger';
+  logs: Log[] = [];
 
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
-  getLogs() {
-    return this.httpClient.get<Log>(this.loggerUrl);
+  addLog(log: string) {
+    this.logs.push(new Log(this.logs.length, this.getDateTime(), log));
   }
 
-  log(log: string): Observable<any> {
-    return this.getLogs().pipe(
-      mergeMap((res: any) => {
-        let newId = res.length + 1;
-        let logJson = new Log(newId, this.getDateTime(), log);
-        return this.httpClient.post(this.loggerUrl, logJson);
-      })
-    );
-  }
-
-  clearLogs(): Observable<any> {
-    return this.getLogs().pipe(
-      mergeMap((res: any) => {
-        let ids = Array.from(Array(res.length).keys()).map(String)
-        return this.httpClient.delete(this.loggerUrl + '/' + ids);
-      })
-    );
-  }
-
-  deleteLog(idLog: string): Observable<any> {
-    return this.httpClient.delete(this.loggerUrl + '/' + idLog);
+  clearLogs() {
+    this.logs = [];
   }
 
   getDateTime(): string {

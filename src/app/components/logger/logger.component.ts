@@ -10,25 +10,7 @@ import { LoggerService } from 'src/app/services/logger.service';
   styleUrls: ['./logger.component.scss'],
 })
 export class LoggerComponent implements OnInit {
-  logs: Log[] = [];
+  constructor(public loggerService: LoggerService) {}
 
-  constructor(private loggerService: LoggerService) {}
-
-  ngOnInit(): void {
-    this.getLogs();
-  }
-
-  clearLogs(): void {
-    // this.loggerService.getLogs().subscribe((res: any) => {
-    //   res.forEach((log) => {
-    //     this.loggerService.deleteLog(log.id).subscribe();
-    //   });
-    //   // this.logs = [];
-    // });
-    this.loggerService.clearLogs().subscribe();
-  }
-
-  getLogs(): void {
-    this.loggerService.getLogs().subscribe((res: any) => (this.logs = res));
-  }
+  ngOnInit(): void {}
 }

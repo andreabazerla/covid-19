@@ -27,7 +27,7 @@ export class PfizerComponent implements OnInit {
     this.pfizerService.updateVaccino(checkbox).subscribe((res: any) => {
       this.vaccino.setValue(res.vaccino);
       this.update.emit(checkbox);
-      this.loggerService.log(`Pfizer: vaccino = ${res.vaccino}`).subscribe();
+      this.loggerService.addLog(`Pfizer: vaccino = ${res.vaccino}`);
     });
   }
 }
