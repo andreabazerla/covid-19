@@ -20,23 +20,6 @@ export class ConteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // if (!this.cinaService.pandemia) {
-    //   this.zona.disable();
-    //   this.zona.setValue('');
-    // } else {
-    //   if (this.pfizerService.vaccino) {
-    //     this.zona.disable();
-    //     this.zona.setValue('');
-    //   } else {
-    //     let zona = this.conteService.zona;
-    //     if (zona === '') {
-    //       this.zona.setValue('gialla');
-    //     } else {
-    //       this.zona.setValue(zona);
-    //     }
-    //   }
-    // }
-
     this.zona.setValue(this.conteService.zona.zona);
     if (this.conteService.zona.state == State.DISABLE) {
       this.zona.disable();
