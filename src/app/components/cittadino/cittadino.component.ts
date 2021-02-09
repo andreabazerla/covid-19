@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CinaService } from 'src/app/services/cina.service';
-import { CittadinoService } from 'src/app/services/cittadino.service';
-import { ConteService } from 'src/app/services/conte.service';
-import { PfizerService } from 'src/app/services/pfizer.service';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
+import { ConteService } from 'src/app/services/conte/conte.service';
+import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
 
 @Component({
   selector: 'app-cittadino',
@@ -34,12 +34,12 @@ export class CittadinoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cinaService.pandemia$.subscribe((res) => (this.pandemia = res));
-    this.pfizerService.vaccino.subscribe((res) => (this.vaccino = res));
-    this.cittadinoService.mascherine.subscribe(
+    this.pfizerService.vaccino$.subscribe((res) => (this.vaccino = res));
+    this.cittadinoService.mascherine$.subscribe(
       (res) => (this.mascherine = res)
     );
 
-    this.mascherine = this.cittadinoService.getMascherine();
+    this.mascherine = this.cittadinoService.mascherine
 
     if (this.pandemia) {
       if (this.vaccino) {
@@ -47,7 +47,7 @@ export class CittadinoComponent implements OnInit {
         this.outPLace.controls['farmacia'].disable();
       } else {
         this.outPLace.controls['universita'].disable();
-        let zona = this.conteService.getZona();
+        let zona = this.conteService.zona;
         if (zona === '') {
           this.zona.setValue('gialla');
         } else {
@@ -96,11 +96,12 @@ export class CittadinoComponent implements OnInit {
   withoutMask() {}
 
   useMask() {
-    let mascherine = this.cittadinoService.getMascherine();
+    let mascherine = this.cittadinoService.mascherine;
 
     if (mascherine > 0) {
       mascherine -= 1;
-      this.cittadinoService.mascherine.next(mascherine);
+      // TODO: attenzione
+      this.cittadinoService.mascherine = mascherine;
       if (mascherine === 0) {
         if (this.pandemia && !this.vaccino) {
           this.outPLace.controls['cane'].disable();
@@ -112,9 +113,9 @@ export class CittadinoComponent implements OnInit {
   }
 
   buyMask() {
-    let mascherine = this.cittadinoService.getMascherine();
+    let mascherine = this.cittadinoService.mascherine;
     mascherine += 10;
-    this.cittadinoService.mascherine.next(mascherine);
+    this.cittadinoService.mascherine = mascherine;
     if (this.pandemia && !this.vaccino) {
       this.outPLace.controls['cane'].enable();
       if (this.zona.value === 'gialla') {

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CinaService } from 'src/app/services/cina.service';
-import { ConteService } from 'src/app/services/conte.service';
-import { LoggerService } from 'src/app/services/logger.service';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
 
 @Component({
   selector: 'app-cina',

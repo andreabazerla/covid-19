@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Services
-import { CinaService } from './services/cina.service';
-import { PfizerService } from './services/pfizer.service';
+import { CinaService } from './services/cina/cina.service';
+import { PfizerService } from './services/pfizer/pfizer.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.cinaService.pandemia$.subscribe((res) => (this.pandemia = res));
-    this.pfizerService.vaccino.subscribe((res) => (this.vaccino = res));
+    this.pfizerService.vaccino$.subscribe((res) => (this.vaccino = res));
   }
 }

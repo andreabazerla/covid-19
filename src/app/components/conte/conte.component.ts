@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CinaService } from 'src/app/services/cina.service';
-import { ConteService } from 'src/app/services/conte.service';
-import { LoggerService } from 'src/app/services/logger.service';
-import { PfizerService } from 'src/app/services/pfizer.service';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { ConteService } from 'src/app/services/conte/conte.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
+import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
 
 @Component({
   selector: 'app-conte',
@@ -25,11 +25,11 @@ export class ConteComponent implements OnInit {
       this.zona.disable();
       this.zona.setValue('');
     } else {
-      if (this.pfizerService.getVaccino()) {
+      if (this.pfizerService.vaccino) {
         this.zona.disable();
         this.zona.setValue('');
       } else {
-        let zona = this.conteService.getZona();
+        let zona = this.conteService.zona;
         if (zona === '') {
           this.zona.setValue('gialla');
         } else {
@@ -40,7 +40,7 @@ export class ConteComponent implements OnInit {
   }
 
   setZona(value: string) {
-    this.conteService.setZona(value);
+    this.conteService.zona = value;
     this.zona.setValue(value);
     this.loggerService.addLog(`Conte: zona = ${value}`);
   }

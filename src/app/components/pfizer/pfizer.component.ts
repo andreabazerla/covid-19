@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CinaService } from 'src/app/services/cina.service';
-import { LoggerService } from 'src/app/services/logger.service';
-import { PfizerService } from 'src/app/services/pfizer.service';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
+import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
 
 @Component({
   selector: 'app-pfizer',
@@ -21,7 +21,7 @@ export class PfizerComponent implements OnInit {
 
   ngOnInit(): void {
     let pandemia = this.cinaService.pandemia;
-    let vaccino = this.pfizerService.getVaccino();
+    let vaccino = this.pfizerService.vaccino;
 
     this.vaccino.setValue(vaccino);
 
@@ -36,7 +36,7 @@ export class PfizerComponent implements OnInit {
 
   setVaccino(value: boolean) {
     if (value) {
-      this.pfizerService.setVaccino(value);
+      this.pfizerService.vaccino = value;
       this.vaccino.setValue(value);
       this.eventEmitter.emit(value);
       this.loggerService.addLog(`Pfizer: vaccino = ${value}`);

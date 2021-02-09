@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { Log } from '../models/log';
+import { Log } from '../../models/log';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-
 import { PfizerService } from './pfizer.service';
 
 describe('PfizerService', () => {
