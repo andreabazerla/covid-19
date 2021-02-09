@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Checkbox } from './models/inputs/checkbox';
 
 // Services
 import { CinaService } from './services/cina/cina.service';
@@ -11,8 +12,8 @@ import { PfizerService } from './services/pfizer/pfizer.service';
 })
 export class AppComponent implements OnInit {
   title: string = 'Covid-19';
-  pandemia: boolean;
-  vaccino: boolean;
+  pandemia: Checkbox;
+  vaccino: Checkbox;
 
   constructor(
     private cinaService: CinaService,

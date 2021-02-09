@@ -6,6 +6,6 @@
     type="checkbox"
     [formControl]="pandemia"
     #pandemiaCheckbox
-    (click)="setPandemia(pandemiaCheckbox.checked)"
+    (click)="setPandemia(pandemiaCheckbox.checked ? 1 : 0)"
   />
 </label>

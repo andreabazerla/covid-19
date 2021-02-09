@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Value } from 'src/app/enums/value.enum';
+import { Zona } from 'src/app/enums/zona.enum';
+import { Checkbox } from 'src/app/models/inputs/checkbox';
+import { Select } from 'src/app/models/inputs/select';
 import { CinaService } from 'src/app/services/cina/cina.service';
 import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
 import { ConteService } from 'src/app/services/conte/conte.service';
+import { LoggerService } from 'src/app/services/logger/logger.service';
 import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
 
 @Component({
@@ -11,11 +16,12 @@ import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
   styleUrls: ['./cittadino.component.scss'],
 })
 export class CittadinoComponent implements OnInit {
-  pandemia: boolean;
-  vaccino: boolean;
+  pandemia: Checkbox;
+  vaccino: Checkbox;
   mascherine: number;
+  zona: Select;
 
-  zona: FormControl = new FormControl();
+  zonaFormControl: FormControl = new FormControl();
 
   outPLace = new FormGroup({
     universita: new FormControl(),
@@ -29,7 +35,8 @@ export class CittadinoComponent implements OnInit {
     private conteService: ConteService,
     private cittadinoService: CittadinoService,
     private cinaService: CinaService,
-    private pfizerService: PfizerService
+    private pfizerService: PfizerService,
+    private loggerService: LoggerService
   ) {}
 
   ngOnInit(): void {
@@ -38,48 +45,41 @@ export class CittadinoComponent implements OnInit {
     this.cittadinoService.mascherine$.subscribe(
       (res) => (this.mascherine = res)
     );
+    this.conteService.zona$.subscribe((res) => (this.zona = res))
 
     this.mascherine = this.cittadinoService.mascherine
 
-    if (this.pandemia) {
-      if (this.vaccino) {
-        this.zona.setValue('');
+    let zona = this.conteService.zona;
+    this.zonaFormControl.setValue(zona.zona);
+    if (this.pandemia.value == Value.TRUE) {
+      if (this.vaccino.value == Value.TRUE) {
+        // this.zona.setValue('');
         this.outPLace.controls['farmacia'].disable();
       } else {
         this.outPLace.controls['universita'].disable();
-        let zona = this.conteService.zona;
-        if (zona === '') {
-          this.zona.setValue('gialla');
-        } else {
-          this.zona.setValue(zona);
+        if (zona.zona == Zona.ARANCIONE) {
+          this.outPLace.controls['bar'].disable();
+        } else if (zona.zona == Zona.ROSSA) {
+          this.outPLace.controls['bar'].disable();
+          this.outPLace.controls['ufficio'].disable();
         }
-        if (this.zona.value === 'gialla') {
-          if (!this.mascherine) {
-            this.outPLace.controls['cane'].disable();
-            this.outPLace.controls['bar'].disable();
-            this.outPLace.controls['ufficio'].disable();
-          }
+        if (this.mascherine <= 0) {
+          this.outPLace.controls['cane'].disable();
+          this.outPLace.controls['bar'].disable();
+          this.outPLace.controls['ufficio'].disable();
         }
       }
     } else {
-      this.zona.setValue('');
-      if (this.vaccino) {
-        this.outPLace.controls['farmacia'].disable();
-      }
+      // this.zonaFormControl.setValue('');
+      this.outPLace.controls['farmacia'].disable();
     }
-    this.zona.disable();
 
-    if (this.zona.value === 'arancione') {
-      this.outPLace.controls['bar'].disable();
-    } else if (this.zona.value === 'rossa') {
-      this.outPLace.controls['bar'].disable();
-      this.outPLace.controls['ufficio'].disable();
-    }
+    this.zonaFormControl.disable();
   }
 
   goOut(): void {
-    if (this.pandemia) {
-      if (!this.vaccino) {
+    if (this.pandemia.value == Value.TRUE) {
+      if (this.vaccino.value == Value.FALSE) {
         return this.withMask();
       } else {
         return this.withoutMask();
@@ -103,7 +103,7 @@ export class CittadinoComponent implements OnInit {
       // TODO: attenzione
       this.cittadinoService.mascherine = mascherine;
       if (mascherine === 0) {
-        if (this.pandemia && !this.vaccino) {
+        if (this.pandemia.value == Value.TRUE && this.vaccino.value == Value.FALSE) {
           this.outPLace.controls['cane'].disable();
           this.outPLace.controls['bar'].disable();
           this.outPLace.controls['ufficio'].disable();
@@ -116,12 +116,12 @@ export class CittadinoComponent implements OnInit {
     let mascherine = this.cittadinoService.mascherine;
     mascherine += 10;
     this.cittadinoService.mascherine = mascherine;
-    if (this.pandemia && !this.vaccino) {
+    if (this.pandemia.value == Value.TRUE && this.vaccino.value == Value.FALSE) {
       this.outPLace.controls['cane'].enable();
-      if (this.zona.value === 'gialla') {
+      if (this.zonaFormControl.value === 'gialla') {
         this.outPLace.controls['bar'].enable();
         this.outPLace.controls['ufficio'].enable();
-      } else if (this.zona.value === 'arancione') {
+      } else if (this.zonaFormControl.value === 'arancione') {
         this.outPLace.controls['ufficio'].enable();
       }
     }

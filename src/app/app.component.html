@@ -7,8 +7,8 @@
   <button routerLink="/logger">Logger</button>
 </div>
 
-<h3>Pandemia: {{ pandemia ? 'ON' : 'OFF' }}</h3>
-<h3>Vaccino: {{ vaccino ? 'ON' : 'OFF' }}</h3>
+<h3>Pandemia: {{ pandemia.value == 1 ? 'ON' : 'OFF' }}</h3>
+<h3>Vaccino: {{ vaccino.value == 1 ? 'ON' : 'OFF' }}</h3>
 
 <br><br>
 

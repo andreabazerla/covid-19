@@ -2,5 +2,10 @@
 
 <label>
   Vaccino:
-  <input type="checkbox" [formControl]="vaccino" #vaccinoCheckbox (click)="setVaccino(vaccinoCheckbox.checked)">
+  <input
+    type="checkbox"
+    [formControl]="vaccino"
+    #vaccinoCheckbox
+    (click)="setVaccino(vaccinoCheckbox.checked ? 1 : 0)"
+  />
 </label>
