@@ -44,18 +44,24 @@ export class CinaComponent implements OnInit {
     let vaccinoValue = this.pfizerService.vaccino.value;
 
     if (value == Value.TRUE) {
-      this.pfizerService.vaccino.state = State.ENABLE;
       if (vaccinoValue == Value.FALSE) {
+        this.pfizerService.vaccino.state = State.ENABLE;
+
         this.conteService.zona.state = State.ENABLE;
         this.conteService.zona.zona = Zona.GIALLA;
 
         this.cittadinoService.universita.state = State.DISABLE;
         this.cittadinoService.farmacia.state = State.ENABLE;
       } else {
+        this.pfizerService.vaccino.state = State.DISABLE;
+
         this.cittadinoService.farmacia.state = State.DISABLE;
       }
     } else {
       this.pfizerService.vaccino.state = State.DISABLE;
+
+      this.conteService.zona.state = State.DISABLE;
+      this.conteService.zona.zona = Zona.BIANCA
 
       this.cittadinoService.universita.state = State.ENABLE;
       this.cittadinoService.farmacia.state = State.DISABLE;

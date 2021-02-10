@@ -1,13 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  <mat-sidenav #sidenav class="sidenav" (click)="toggle(sidenav)" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>{{ menu }}</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink='/login'>{{ menuLogin }}</a>
+      <!-- <a mat-list-item routerLink='/logger'>{{ menuLogger }}</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -16,12 +15,39 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="toggle(sidenav)"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>covid19</span>
+        </button>
+      <span>{{ title }}</span>
+      <span spacer class="spacer"></span>
+      <div>
+        <ul>
+          <li>
+            <span
+              matBadge="{{ pandemia.value == 1 ? 'ON' : 'OFF' }}"
+              matBadgeOverlap="false"
+              matBadgeColor="accent"
+              matBadgePosition="before">
+              {{ labelPandemia }}
+            </span>
+          </li>
+          <li>
+            <span
+              matBadge="{{ vaccino.value == 1 ? 'ON' : 'OFF' }}"
+              matBadgeOverlap="false"
+              matBadgeColor="accent"
+              matBadgePosition="before">
+              {{ labelVaccino }}
+            </span>
+          </li>
+        </ul>
+      </div>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <div class="router-outlet">
+      <router-outlet></router-outlet>
+      <br><br>
+      <app-logger style="position: absolute; top: 400px;"></app-logger>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -48,11 +48,6 @@ describe('CittadinoComponent', () => {
     expect(component.title).toEqual(title);
   });
 
-  it('should render title', () => {
-    const compiled = componentFixture.nativeElement;
-    expect(compiled.querySelector('h3').textContent).toContain(title);
-  });
-
   it(`should have as zona label text 'Zona'`, () => {
     expect(component.labelZona).toEqual(labelZona);
   });
