@@ -15,14 +15,10 @@ import { PfizerComponent } from './components/pfizer/pfizer.component';
 import { ConteComponent } from './components/conte/conte.component';
 import { CittadinoComponent } from './components/cittadino/cittadino.component';
 import { LoggerComponent } from './components/logger/logger.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './navigation/navigation.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+
+// Angular Material module
+import { AngularMaterialModule } from './material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -40,13 +36,7 @@ import { MatListModule } from '@angular/material/list';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
+    AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
