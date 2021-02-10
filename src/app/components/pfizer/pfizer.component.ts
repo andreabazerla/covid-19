@@ -4,6 +4,8 @@ import { State } from 'src/app/enums/state.enum';
 import { Value } from 'src/app/enums/value.enum';
 import { Zona } from 'src/app/enums/zona.enum';
 import { Checkbox } from 'src/app/models/inputs/checkbox';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
 import { ConteService } from 'src/app/services/conte/conte.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
 import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
@@ -18,8 +20,10 @@ export class PfizerComponent implements OnInit {
   @Output() eventEmitter = new EventEmitter<number>();
 
   constructor(
+    private cinaService: CinaService,
     private pfizerService: PfizerService,
     private conteService: ConteService,
+    private cittadinoService: CittadinoService,
     private loggerService: LoggerService
   ) {}
 
@@ -43,6 +47,12 @@ export class PfizerComponent implements OnInit {
 
       this.conteService.zona.zona = Zona.BIANCA;
       this.conteService.zona.state = State.DISABLE;
+
+      this.cittadinoService.universita.state = State.ENABLE;
+      this.cittadinoService.farmacia.state = State.DISABLE;
+      this.cittadinoService.cane.state = State.ENABLE;
+      this.cittadinoService.ufficio.state = State.ENABLE;
+      this.cittadinoService.bar.state = State.ENABLE;
     }
   }
 }

@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { State } from 'src/app/enums/state.enum';
 import { Value } from 'src/app/enums/value.enum';
 import { Zona } from 'src/app/enums/zona.enum';
+import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
 import { ConteService } from 'src/app/services/conte/conte.service';
 import { LoggerService } from 'src/app/services/logger/logger.service';
 
@@ -16,6 +17,7 @@ export class ConteComponent implements OnInit {
 
   constructor(
     private conteService: ConteService,
+    private cittadinoService: CittadinoService,
     private loggerService: LoggerService
   ) {}
 
@@ -40,5 +42,16 @@ export class ConteComponent implements OnInit {
     this.conteService.zona.zona = valueEnum;
     this.zona.setValue(value);
     this.loggerService.addLog(`Conte: zona = ${value}`);
+
+    if (value == Zona.ARANCIONE) {
+      this.cittadinoService.bar.state = State.DISABLE;
+      this.cittadinoService.ufficio.state = State.ENABLE;
+    } else if (value == Zona.ROSSA) {
+      this.cittadinoService.bar.state = State.DISABLE;
+      this.cittadinoService.ufficio.state = State.DISABLE;
+    } else if (value == Zona.GIALLA) {
+      this.cittadinoService.bar.state = State.ENABLE;
+      this.cittadinoService.ufficio.state = State.ENABLE;
+    }
   }
 }

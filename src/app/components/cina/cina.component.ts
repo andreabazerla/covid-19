@@ -46,9 +46,17 @@ export class CinaComponent implements OnInit {
       if (vaccinoValue == Value.FALSE) {
         this.conteService.zona.state = State.ENABLE;
         this.conteService.zona.zona = Zona.GIALLA;
+
+        this.cittadinoService.universita.state = State.DISABLE;
+        this.cittadinoService.farmacia.state = State.ENABLE;
+      } else {
+        this.cittadinoService.farmacia.state = State.DISABLE;
       }
     } else {
       this.pfizerService.vaccino.state = State.DISABLE;
+
+      this.cittadinoService.universita.state = State.ENABLE;
+      this.cittadinoService.farmacia.state = State.DISABLE;
     }
   }
 }
