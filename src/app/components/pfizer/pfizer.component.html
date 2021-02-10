@@ -1,0 +1,11 @@
+<h3>{{ title }}</h3>
+
+<label>
+  {{ labelVaccino }}:
+  <input
+    type="checkbox"
+    [formControl]="vaccino"
+    #vaccinoCheckbox
+    (click)="setVaccino(vaccinoCheckbox.checked ? 1 : 0)"
+  />
+</label>

@@ -1,0 +1,7 @@
+<h3>Logs</h3>
+
+<div *ngIf="loggerService.logs.length > 0">
+  <button type="button" (click)="loggerService.clearLogs()">Clear</button>
+  <br><br>
+  <div *ngFor="let log of loggerService.logs.slice().reverse()">{{ log.id }} - ({{ log.timestamp }}): {{ log.text }}</div>
+</div>
