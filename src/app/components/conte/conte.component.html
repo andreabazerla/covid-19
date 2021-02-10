@@ -1,10 +1,10 @@
-<h3>Conte</h3>
+<h3>{{ title }}</h3>
 
 <label>
-  Zona:
+  {{ labelZona }}:
   <select [formControl]="zona" #zonaSelect (click)="setZona(zonaSelect.value)">
-    <option value="gialla">Gialla</option>
-    <option value="arancione">Arancione</option>
-    <option value="rossa">Rossa</option>
+    <option value="gialla">{{ optionZonaGialla }}</option>
+    <option value="arancione">{{ optionZonaArancione }}</option>
+    <option value="rossa">{{ optionZonaRossa }}</option>
   </select>
 </label>

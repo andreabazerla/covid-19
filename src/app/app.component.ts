@@ -12,6 +12,11 @@ import { PfizerService } from './services/pfizer/pfizer.service';
 })
 export class AppComponent implements OnInit {
   title: string = 'Covid-19';
+  menu: string = 'Menu';
+  menuLogin: string = 'Login';
+  menuLogger: string = 'Logger';
+  labelPandemia: string = 'Pandemia';
+  labelVaccino: string = 'Vaccino';
   pandemia: Checkbox;
   vaccino: Checkbox;
 

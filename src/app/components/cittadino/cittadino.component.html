@@ -1,28 +1,28 @@
-<h3>Cittadino</h3>
+<h3>{{ title }}</h3>
 
 <label>
-  Zona:
+  {{ labelZona }}:
   <select [formControl]="zonaFormControl" #zonaSelect>
-    <option value="gialla">Gialla</option>
-    <option value="arancione">Arancione</option>
-    <option value="rossa">Rossa</option>
+    <option value="gialla">{{ optionZonaGialla }}</option>
+    <option value="arancione">{{ optionZonaArancione }}</option>
+    <option value="rossa">{{ optionZonaRossa }}</option>
   </select>
 </label>
 
 <br><br>
 
 <label>
-  Mascherine:
+  {{ labelMascherine }}:
   <span>{{ mascherine }}</span>
 </label>
 
 <br><br>
 
-Esci di casa:
-<form [formGroup]="outPLace">
-  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>Università</button>
-  <button type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>Farmacia</button>
-  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>Cane</button>
-  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>Ufficio</button>
-  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>Bar</button>
+{{ labelActions }}:
+<form [formGroup]="actions">
+  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>{{ buttonUniversita }}</button>
+  <button type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>{{ buttonFarmacia }}</button>
+  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>{{ buttonCane }}</button>
+  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>{{ buttonUfficio }}</button>
+  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>{{ buttonBar }}</button>
 </form>

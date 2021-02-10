@@ -1,14 +1,14 @@
 <h1>{{ title }}</h1>
 
-<h2>Menu</h2>
+<h2>{{ menu }}</h2>
 
 <div>
-  <button routerLink="/login">Login</button>
-  <button routerLink="/logger">Logger</button>
+  <button routerLink="/login">{{ menuLogin }}</button>
+  <button routerLink="/logger">{{ menuLogger }}</button>
 </div>
 
-<h3>Pandemia: {{ pandemia.value == 1 ? 'ON' : 'OFF' }}</h3>
-<h3>Vaccino: {{ vaccino.value == 1 ? 'ON' : 'OFF' }}</h3>
+<h3>{{ labelPandemia }}: {{ pandemia.value == 1 ? 'ON' : 'OFF' }}</h3>
+<h3>{{ labelVaccino }}: {{ vaccino.value == 1 ? 'ON' : 'OFF' }}</h3>
 
 <br><br>
 

@@ -15,6 +15,8 @@ import { PfizerService } from '../../../app/services/pfizer/pfizer.service';
   styleUrls: ['./pfizer.component.scss'],
 })
 export class PfizerComponent implements OnInit {
+  title = 'Pfizer';
+  labelVaccino = 'Vaccino';
   vaccino: FormControl = new FormControl();
   @Output() eventEmitter = new EventEmitter<number>();
 

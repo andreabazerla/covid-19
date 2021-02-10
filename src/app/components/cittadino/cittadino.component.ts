@@ -18,6 +18,19 @@ import { PfizerService } from '../../../app/services/pfizer/pfizer.service';
   styleUrls: ['./cittadino.component.scss'],
 })
 export class CittadinoComponent implements OnInit {
+  title: string = 'Cittadino';
+  labelZona: string = 'Zona';
+  optionZonaGialla: string = 'Gialla';
+  optionZonaArancione: string = 'Arancione';
+  optionZonaRossa: string = 'Rossa';
+  labelMascherine: string = 'Mascherine';
+  labelActions: string = 'Esci di casa';
+  buttonUniversita: string = 'Università';
+  buttonFarmacia: string = 'Farmacia';
+  buttonCane: string = 'Cane';
+  buttonUfficio: string = 'Ufficio';
+  buttonBar: string = 'Bar';
+
   pandemia: Checkbox;
   vaccino: Checkbox;
   zona: Select;
@@ -30,7 +43,7 @@ export class CittadinoComponent implements OnInit {
 
   zonaFormControl: FormControl = new FormControl();
 
-  outPLace = new FormGroup({
+  actions = new FormGroup({
     universita: new FormControl(),
     farmacia: new FormControl(),
     cane: new FormControl(),
@@ -67,45 +80,45 @@ export class CittadinoComponent implements OnInit {
     this.cittadinoService.universita$.subscribe((res) => {
       this.universita = res;
       if (res.state == State.ENABLE) {
-        this.outPLace.controls['universita'].enable();
+        this.actions.controls['universita'].enable();
       } else if (res.state == State.DISABLE) {
-        this.outPLace.controls['universita'].disable();
+        this.actions.controls['universita'].disable();
       }
     });
 
     this.cittadinoService.farmacia$.subscribe((res) => {
       this.farmacia = res;
       if (res.state == State.ENABLE) {
-        this.outPLace.controls['farmacia'].enable();
+        this.actions.controls['farmacia'].enable();
       } else if (res.state == State.DISABLE) {
-        this.outPLace.controls['farmacia'].disable();
+        this.actions.controls['farmacia'].disable();
       }
     });
 
     this.cittadinoService.cane$.subscribe((res) => {
       this.cane = res;
       if (res.state == State.ENABLE) {
-        this.outPLace.controls['cane'].enable();
+        this.actions.controls['cane'].enable();
       } else if (res.state == State.DISABLE) {
-        this.outPLace.controls['cane'].disable();
+        this.actions.controls['cane'].disable();
       }
     });
 
     this.cittadinoService.ufficio$.subscribe((res) => {
       this.ufficio = res;
       if (res.state == State.ENABLE) {
-        this.outPLace.controls['ufficio'].enable();
+        this.actions.controls['ufficio'].enable();
       } else if (res.state == State.DISABLE) {
-        this.outPLace.controls['ufficio'].disable();
+        this.actions.controls['ufficio'].disable();
       }
     });
 
     this.cittadinoService.bar$.subscribe((res) => {
       this.bar = res;
       if (res.state == State.ENABLE) {
-        this.outPLace.controls['bar'].enable();
+        this.actions.controls['bar'].enable();
       } else if (res.state == State.DISABLE) {
-        this.outPLace.controls['bar'].disable();
+        this.actions.controls['bar'].disable();
       }
     });
 
@@ -115,31 +128,31 @@ export class CittadinoComponent implements OnInit {
     // this.zonaFormControl.setValue(zona.zona);
     // if (this.pandemia.value == Value.TRUE) {
     //   if (this.vaccino.value == Value.TRUE) {
-    //     this.outPLace.controls['farmacia'].disable();
+    //     this.actions.controls['farmacia'].disable();
     //   } else {
-    //     this.outPLace.controls['universita'].disable();
+    //     this.actions.controls['universita'].disable();
     //     if (zona.zona == Zona.ARANCIONE) {
-    //       this.outPLace.controls['bar'].disable();
+    //       this.actions.controls['bar'].disable();
     //     } else if (zona.zona == Zona.ROSSA) {
-    //       this.outPLace.controls['bar'].disable();
-    //       this.outPLace.controls['ufficio'].disable();
+    //       this.actions.controls['bar'].disable();
+    //       this.actions.controls['ufficio'].disable();
     //     }
     //     if (this.mascherine <= 0) {
-    //       this.outPLace.controls['cane'].disable();
-    //       this.outPLace.controls['bar'].disable();
-    //       this.outPLace.controls['ufficio'].disable();
+    //       this.actions.controls['cane'].disable();
+    //       this.actions.controls['bar'].disable();
+    //       this.actions.controls['ufficio'].disable();
     //     }
     //   }
     // } else {
-    //   this.outPLace.controls['farmacia'].disable();
+    //   this.actions.controls['farmacia'].disable();
     // }
 
     if (this.pandemia.value == Value.TRUE) {
       if (this.vaccino.value == Value.FALSE) {
         if (this.mascherine <= 0) {
-          this.outPLace.controls['cane'].disable();
-          this.outPLace.controls['bar'].disable();
-          this.outPLace.controls['ufficio'].disable();
+          this.actions.controls['cane'].disable();
+          this.actions.controls['bar'].disable();
+          this.actions.controls['ufficio'].disable();
         }
       }
     }
@@ -179,9 +192,9 @@ export class CittadinoComponent implements OnInit {
           this.pandemia.value == Value.TRUE &&
           this.vaccino.value == Value.FALSE
         ) {
-          this.outPLace.controls['cane'].disable();
-          this.outPLace.controls['bar'].disable();
-          this.outPLace.controls['ufficio'].disable();
+          this.actions.controls['cane'].disable();
+          this.actions.controls['bar'].disable();
+          this.actions.controls['ufficio'].disable();
         }
       }
     }
@@ -196,12 +209,12 @@ export class CittadinoComponent implements OnInit {
       this.pandemia.value == Value.TRUE &&
       this.vaccino.value == Value.FALSE
     ) {
-      this.outPLace.controls['cane'].enable();
+      this.actions.controls['cane'].enable();
       if (this.zonaFormControl.value === 'gialla') {
-        this.outPLace.controls['bar'].enable();
-        this.outPLace.controls['ufficio'].enable();
+        this.actions.controls['bar'].enable();
+        this.actions.controls['ufficio'].enable();
       } else if (this.zonaFormControl.value === 'arancione') {
-        this.outPLace.controls['ufficio'].enable();
+        this.actions.controls['ufficio'].enable();
       }
     }
   }

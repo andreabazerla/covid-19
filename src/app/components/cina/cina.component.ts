@@ -15,6 +15,8 @@ import { PfizerService } from '../../../app/services/pfizer/pfizer.service';
   styleUrls: ['./cina.component.scss'],
 })
 export class CinaComponent implements OnInit {
+  title = 'Cina';
+  labelPandemia = 'Pandemia';
   pandemia: FormControl = new FormControl();
   @Output() eventEmitter = new EventEmitter<number>();
 
@@ -23,7 +25,7 @@ export class CinaComponent implements OnInit {
     private pfizerService: PfizerService,
     private conteService: ConteService,
     private cittadinoService: CittadinoService,
-    private loggerService: LoggerService,
+    private loggerService: LoggerService
   ) {}
 
   ngOnInit(): void {

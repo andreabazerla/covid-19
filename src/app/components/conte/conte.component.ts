@@ -12,6 +12,11 @@ import { LoggerService } from '../../../app/services/logger/logger.service';
   styleUrls: ['./conte.component.scss'],
 })
 export class ConteComponent implements OnInit {
+  title = 'Conte';
+  labelZona = 'Zona';
+  optionZonaGialla = 'Gialla';
+  optionZonaArancione = 'Arancione';
+  optionZonaRossa = 'Rossa';
   zona: FormControl = new FormControl();
 
   constructor(
