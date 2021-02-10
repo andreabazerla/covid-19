@@ -15,6 +15,10 @@ import { PfizerComponent } from './components/pfizer/pfizer.component';
 import { ConteComponent } from './components/conte/conte.component';
 import { CittadinoComponent } from './components/cittadino/cittadino.component';
 import { LoggerComponent } from './components/logger/logger.component';
+import { NavigationComponent } from './navigation/navigation.component';
+
+// Angular Material module
+import { AngularMaterialModule } from './material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -25,12 +29,14 @@ import { LoggerComponent } from './components/logger/logger.component';
     ConteComponent,
     CittadinoComponent,
     LoggerComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

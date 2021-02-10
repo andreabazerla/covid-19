@@ -35,11 +35,6 @@ describe('PfizerComponent', () => {
     expect(component.title).toEqual(title);
   });
 
-  it('should render title', () => {
-    const compiled = componentFixture.nativeElement;
-    expect(compiled.querySelector('h3').textContent).toContain(title);
-  });
-
   it(`should have as vaccino label text 'Vaccino'`, () => {
     expect(component.labelVaccino).toEqual(labelVaccino);
   });

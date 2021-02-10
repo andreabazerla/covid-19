@@ -1,15 +1,1 @@
-<h1>{{ title }}</h1>
-
-<h2>{{ menu }}</h2>
-
-<div>
-  <button routerLink="/login">{{ menuLogin }}</button>
-  <button routerLink="/logger">{{ menuLogger }}</button>
-</div>
-
-<h3>{{ labelPandemia }}: {{ pandemia.value == 1 ? 'ON' : 'OFF' }}</h3>
-<h3>{{ labelVaccino }}: {{ vaccino.value == 1 ? 'ON' : 'OFF' }}</h3>
-
-<br><br>
-
 <router-outlet></router-outlet>
