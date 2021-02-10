@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { State } from 'src/app/enums/state.enum';
-import { Value } from 'src/app/enums/value.enum';
-import { Zona } from 'src/app/enums/zona.enum';
-import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
-import { ConteService } from 'src/app/services/conte/conte.service';
-import { LoggerService } from 'src/app/services/logger/logger.service';
+import { State } from '../../../app/enums/state.enum';
+import { Zona } from '../../../app/enums/zona.enum';
+import { CittadinoService } from '../../../app/services/cittadino/cittadino.service';
+import { ConteService } from '../../../app/services/conte/conte.service';
+import { LoggerService } from '../../../app/services/logger/logger.service';
 
 @Component({
   selector: 'app-conte',

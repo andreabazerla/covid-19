@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoggerService } from 'src/app/services/logger/logger.service';
+import { LoggerService } from '../../../app/services/logger/logger.service';
 
 @Component({
   selector: 'app-logger',

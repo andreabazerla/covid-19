@@ -1,4 +1,4 @@
-import { State } from 'src/app/enums/state.enum';
+import { State } from '../../../app/enums/state.enum';
 import { Button } from './button';
 
 describe('Button', () => {

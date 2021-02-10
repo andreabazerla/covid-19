@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
-import { Value } from 'src/app/enums/value.enum';
-import { Checkbox } from 'src/app/models/inputs/checkbox';
+import { State } from '../../../app/enums/state.enum';
+import { Value } from '../../../app/enums/value.enum';
+import { Checkbox } from '../../../app/models/inputs/checkbox';
 
 @Injectable({
   providedIn: 'root',

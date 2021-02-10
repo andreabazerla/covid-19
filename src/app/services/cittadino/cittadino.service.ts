@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { State } from 'src/app/enums/state.enum';
-import { Button } from 'src/app/models/inputs/button';
+import { State } from '../../../app/enums/state.enum';
+import { Button } from '../../../app/models/inputs/button';
 
 @Injectable({
   providedIn: 'root',
