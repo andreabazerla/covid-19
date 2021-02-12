@@ -1,10 +1,10 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { State } from 'src/app/enums/state.enum';
-import { Value } from 'src/app/enums/value.enum';
-import { Zona } from 'src/app/enums/zona.enum';
-import { Checkbox } from 'src/app/models/inputs/checkbox';
+import { State } from '../../../app/enums/state.enum';
+import { Value } from '../../../app/enums/value.enum';
+import { Zona } from '../../../app/enums/zona.enum';
+import { Checkbox } from '../../../app/models/inputs/checkbox';
 
 import { CittadinoComponent } from './cittadino.component';
 

@@ -3,9 +3,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Checkbox } from 'src/app/models/inputs/checkbox';
-import { CinaService } from 'src/app/services/cina/cina.service';
-import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
+import { Checkbox } from '../../../app/models/inputs/checkbox';
+import { CinaService } from '../../../app/services/cina/cina.service';
+import { PfizerService } from '../../../app/services/pfizer/pfizer.service';
 
 
 @Component({

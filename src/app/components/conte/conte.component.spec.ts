@@ -1,7 +1,7 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Zona } from 'src/app/enums/zona.enum';
+import { Zona } from '../../../app/enums/zona.enum';
 
 import { ConteComponent } from './conte.component';
 
