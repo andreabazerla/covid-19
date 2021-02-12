@@ -1,16 +1,13 @@
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { State } from 'src/app/enums/state.enum';
-import { Value } from 'src/app/enums/value.enum';
+import { Value } from '../../../app/enums/value.enum';
 
 import { CinaComponent } from './cina.component';
 
 describe('CinaComponent', () => {
   let component: CinaComponent;
   let componentFixture: ComponentFixture<CinaComponent>;
-  let debugElement: DebugElement;
 
   const title: string = 'Cina';
   const labelPandemia: string = 'Pandemia';
@@ -30,7 +27,6 @@ describe('CinaComponent', () => {
   beforeEach(() => {
     componentFixture = TestBed.createComponent(CinaComponent);
     component = componentFixture.componentInstance;
-    debugElement = componentFixture.debugElement;
 
     component.ngOnInit();
     componentFixture.detectChanges();

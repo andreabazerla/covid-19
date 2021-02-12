@@ -2,13 +2,13 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AngularMaterialModule } from 'src/app/modules/material/angular-material.module';
+import { AngularMaterialModule } from '../../../app/modules/material/angular-material.module';
 
 import { NavigationComponent } from './navigation.component';
 import { LoggerComponent } from '../logger/logger.component';
 
-import { State } from 'src/app/enums/state.enum';
-import { Value } from 'src/app/enums/value.enum';
+import { State } from '../../../app/enums/state.enum';
+import { Value } from '../../../app/enums/value.enum';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
