@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Components
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 import { LoginComponent } from './components/login/login.component';
 import { CinaComponent } from './components/cina/cina.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,10 +17,11 @@ import { PfizerComponent } from './components/pfizer/pfizer.component';
 import { ConteComponent } from './components/conte/conte.component';
 import { CittadinoComponent } from './components/cittadino/cittadino.component';
 import { LoggerComponent } from './components/logger/logger.component';
-import { NavigationComponent } from './navigation/navigation.component';
 
 // Angular Material module
-import { AngularMaterialModule } from './material/angular-material.module';
+import { AngularMaterialModule } from './modules/material/angular-material.module';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { AngularMaterialModule } from './material/angular-material.module';
     CittadinoComponent,
     LoggerComponent,
     NavigationComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { AngularMaterialModule } from './material/angular-material.module';
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

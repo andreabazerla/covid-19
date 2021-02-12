@@ -5,8 +5,8 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>{{ menu }}</mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink='/home'>{{ menuHome }}</a>
       <a mat-list-item routerLink='/login'>{{ menuLogin }}</a>
-      <!-- <a mat-list-item routerLink='/logger'>{{ menuLogger }}</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,7 +27,7 @@
             <span
               matBadge="{{ pandemia.value == 1 ? 'ON' : 'OFF' }}"
               matBadgeOverlap="false"
-              matBadgeColor="accent"
+              matBadgeColor="{{ pandemia.value == 1 ? 'accent' : 'primary' }}"
               matBadgePosition="before">
               {{ labelPandemia }}
             </span>
@@ -36,7 +36,7 @@
             <span
               matBadge="{{ vaccino.value == 1 ? 'ON' : 'OFF' }}"
               matBadgeOverlap="false"
-              matBadgeColor="accent"
+              matBadgeColor="{{ vaccino.value == 1 ? 'accent' : 'primary' }}"
               matBadgePosition="before">
               {{ labelVaccino }}
             </span>
@@ -44,10 +44,9 @@
         </ul>
       </div>
     </mat-toolbar>
-    <div class="router-outlet">
-      <router-outlet></router-outlet>
-      <br><br>
-      <app-logger style="position: absolute; top: 400px;"></app-logger>
+    <div class="router-outlet" fxLayout="column" fxLayoutAlign="space-between start" fxFill>
+      <div><router-outlet></router-outlet></div>
+      <div><app-logger style="position: absolute; top: 400px;"></app-logger></div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

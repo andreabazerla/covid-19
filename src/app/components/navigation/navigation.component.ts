@@ -3,9 +3,10 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Checkbox } from '../models/inputs/checkbox';
-import { CinaService } from '../services/cina/cina.service';
-import { PfizerService } from '../services/pfizer/pfizer.service';
+import { Checkbox } from 'src/app/models/inputs/checkbox';
+import { CinaService } from 'src/app/services/cina/cina.service';
+import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
+
 
 @Component({
   selector: 'app-navigation',
@@ -15,8 +16,8 @@ import { PfizerService } from '../services/pfizer/pfizer.service';
 export class NavigationComponent implements OnInit {
   title: string = 'Covid-19';
   menu: string = 'Menu';
+  menuHome: string = 'Home';
   menuLogin: string = 'Login';
-  menuLogger: string = 'Logger';
   labelPandemia: string = 'Pandemia';
   labelVaccino: string = 'Vaccino';
   pandemia: Checkbox;

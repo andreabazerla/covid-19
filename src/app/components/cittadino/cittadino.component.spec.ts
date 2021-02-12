@@ -2,7 +2,9 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { State } from 'src/app/enums/state.enum';
+import { Value } from 'src/app/enums/value.enum';
 import { Zona } from 'src/app/enums/zona.enum';
+import { Checkbox } from 'src/app/models/inputs/checkbox';
 
 import { CittadinoComponent } from './cittadino.component';
 
@@ -31,13 +33,14 @@ describe('CittadinoComponent', () => {
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  beforeEach(async() => {
     componentFixture = TestBed.createComponent(CittadinoComponent);
     component = componentFixture.componentInstance;
     debugElement = componentFixture.debugElement;
 
     component.ngOnInit();
     componentFixture.detectChanges();
+    await componentFixture.whenStable();
   });
 
   it('should create', () => {
@@ -102,5 +105,42 @@ describe('CittadinoComponent', () => {
 
   it('initial zona select value to Zona Bianca', () => {
     expect(component.zona.zona).toBe(Zona.BIANCA);
+  });
+
+  it('should start with a mascherine counter at `0`', () => {
+    expect(component.mascherine).toEqual(0);
+  });
+
+  it('should render mascherine counter', () => {
+    const compiled = componentFixture.nativeElement;
+    expect(compiled.querySelector('.mascherine').textContent).toContain('0');
+  });
+
+  it('should be able to increment the mascherine counter from 0 to 10 when pandemia is true and vaccino false', () => {
+    component.pandemia = new Checkbox(State.ENABLE, Value.TRUE);
+    component.vaccino = new Checkbox(State.ENABLE, Value.FALSE);
+    component.mascherine = 0;
+
+    component.goFarmacia();
+
+    expect(component.mascherine).toEqual(10);
+  });
+
+  it('should be able to increment the mascherine counter from 1 to 10 when pandemia is true and vaccino false', () => {
+    component.pandemia = new Checkbox(State.ENABLE, Value.TRUE);
+    component.vaccino = new Checkbox(State.ENABLE, Value.FALSE);
+    component.mascherine = 1;
+
+    component.goFarmacia();
+
+    expect(component.mascherine).toEqual(10);
+  });
+
+  it('should render farmacia button disabled if pandemia false and vaccino false', () => {
+    component.pandemia = new Checkbox(State.ENABLE, Value.FALSE);
+    component.vaccino = new Checkbox(State.DISABLE, Value.FALSE);
+
+    const compiled = componentFixture.nativeElement;
+    expect(compiled.querySelector('.button-farmacia').disabled).toBeTrue();
   });
 });

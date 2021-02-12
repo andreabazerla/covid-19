@@ -1,18 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CinaComponent } from './components/cina/cina.component';
-import { CittadinoComponent } from './components/cittadino/cittadino.component';
-import { ConteComponent } from './components/conte/conte.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { CinaComponent } from './components/cina/cina.component';
 import { PfizerComponent } from './components/pfizer/pfizer.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { ConteComponent } from './components/conte/conte.component';
+import { CittadinoComponent } from './components/cittadino/cittadino.component';
 
 const routes: Routes = [
   {
     path: '',
     component: NavigationComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
       {
         path: 'login',
         component: LoginComponent,
@@ -32,7 +42,7 @@ const routes: Routes = [
       {
         path: 'cittadino',
         component: CittadinoComponent,
-      }
+      },
     ],
   },
 ];

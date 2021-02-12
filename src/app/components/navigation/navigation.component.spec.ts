@@ -1,13 +1,14 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { AngularMaterialModule } from 'src/app/modules/material/angular-material.module';
 
 import { NavigationComponent } from './navigation.component';
-import { DebugElement } from '@angular/core';
-import { State } from '../enums/state.enum';
-import { Value } from '../enums/value.enum';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AngularMaterialModule } from '../material/angular-material.module';
-import { LoggerComponent } from '../components/logger/logger.component';
+import { LoggerComponent } from '../logger/logger.component';
+
+import { State } from 'src/app/enums/state.enum';
+import { Value } from 'src/app/enums/value.enum';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -15,7 +16,7 @@ describe('NavigationComponent', () => {
 
   const menu: string = 'Menu';
   const menuLogin: string = 'Login';
-  const menuLogger: string = 'Logger';
+  const menuHome: string = 'Home';
   const labelPandemia: string = 'Pandemia';
   const labelVaccino: string = 'Vaccino';
 
@@ -60,8 +61,8 @@ describe('NavigationComponent', () => {
     expect(component.menuLogin).toEqual(menuLogin);
   });
 
-  it(`should have as menu logger text 'Logger'`, () => {
-    expect(component.menuLogger).toEqual(menuLogger);
+  it(`should have as menu home text 'Home'`, () => {
+    expect(component.menuHome).toEqual(menuHome);
   });
 
   it(`should have as pandemia label text 'Pandemia'`, () => {
