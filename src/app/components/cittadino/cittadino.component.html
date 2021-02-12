@@ -1,4 +1,4 @@
-<h3>{{ title }}</h3>
+<h1>{{ title }}</h1>
 
 <label>
   {{ labelZona }}:
@@ -13,16 +13,17 @@
 
 <label>
   {{ labelMascherine }}:
-  <span>{{ mascherine }}</span>
+  <span class="mascherine">{{ mascherine }}</span>
 </label>
 
 <br><br>
 
-{{ labelActions }}:
+<!-- TODO: convertire button in mat-button -->
+<p>{{ labelActions }}:</p>
 <form [formGroup]="actions">
-  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>{{ buttonUniversita }}</button>
-  <button type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>{{ buttonFarmacia }}</button>
-  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>{{ buttonCane }}</button>
-  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>{{ buttonUfficio }}</button>
-  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>{{ buttonBar }}</button>
+  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>{{ buttonUniversita }}</button>&nbsp;
+  <button class="button-farmacia" type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>{{ buttonFarmacia }}</button>&nbsp;
+  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>{{ buttonCane }}</button>&nbsp;
+  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>{{ buttonUfficio }}</button>&nbsp;
+  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>{{ buttonBar }}</button>&nbsp;
 </form>

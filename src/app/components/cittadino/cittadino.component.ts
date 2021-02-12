@@ -124,29 +124,6 @@ export class CittadinoComponent implements OnInit {
 
     this.mascherine = this.cittadinoService.mascherine;
 
-    // let zona = this.conteService.zona;
-    // this.zonaFormControl.setValue(zona.zona);
-    // if (this.pandemia.value == Value.TRUE) {
-    //   if (this.vaccino.value == Value.TRUE) {
-    //     this.actions.controls['farmacia'].disable();
-    //   } else {
-    //     this.actions.controls['universita'].disable();
-    //     if (zona.zona == Zona.ARANCIONE) {
-    //       this.actions.controls['bar'].disable();
-    //     } else if (zona.zona == Zona.ROSSA) {
-    //       this.actions.controls['bar'].disable();
-    //       this.actions.controls['ufficio'].disable();
-    //     }
-    //     if (this.mascherine <= 0) {
-    //       this.actions.controls['cane'].disable();
-    //       this.actions.controls['bar'].disable();
-    //       this.actions.controls['ufficio'].disable();
-    //     }
-    //   }
-    // } else {
-    //   this.actions.controls['farmacia'].disable();
-    // }
-
     if (this.pandemia.value == Value.TRUE) {
       if (this.vaccino.value == Value.FALSE) {
         if (this.mascherine <= 0) {

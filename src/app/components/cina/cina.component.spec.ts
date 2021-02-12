@@ -44,11 +44,6 @@ describe('CinaComponent', () => {
     expect(component.title).toEqual(title);
   });
 
-  it('should render title', () => {
-    const compiled = componentFixture.nativeElement;
-    expect(compiled.querySelector('h3').textContent).toContain(title);
-  });
-
   it(`should have as pandemia label text 'Pandemia'`, () => {
     expect(component.labelPandemia).toEqual(labelPandemia);
   });

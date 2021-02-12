@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { State } from '../../../app/enums/state.enum';
 import { Value } from '../../../app/enums/value.enum';
 import { Zona } from '../../../app/enums/zona.enum';
-import { CinaService } from '../../../app/services/cina/cina.service';
 import { CittadinoService } from '../../../app/services/cittadino/cittadino.service';
 import { ConteService } from '../../../app/services/conte/conte.service';
 import { LoggerService } from '../../../app/services/logger/logger.service';
@@ -21,7 +20,6 @@ export class PfizerComponent implements OnInit {
   @Output() eventEmitter = new EventEmitter<number>();
 
   constructor(
-    private cinaService: CinaService,
     private pfizerService: PfizerService,
     private conteService: ConteService,
     private cittadinoService: CittadinoService,
