@@ -11,16 +11,16 @@ import { LoggerService } from '../../../app/services/logger/logger.service';
 import { Value } from '../../../app/enums/value.enum';
 
 import { CinaComponent } from './cina.component';
-import { Log } from 'src/app/models/log/log';
-import { PfizerService } from 'src/app/services/pfizer/pfizer.service';
-import { State } from 'src/app/enums/state.enum';
+import { Log } from '../../../app/models/log/log';
+import { PfizerService } from '../../../app/services/pfizer/pfizer.service';
+import { State } from '../../../app/enums/state.enum';
 import { BehaviorSubject } from 'rxjs';
-import { Checkbox } from 'src/app/models/inputs/checkbox';
-import { Select } from 'src/app/models/inputs/select';
-import { Zona } from 'src/app/enums/zona.enum';
-import { ConteService } from 'src/app/services/conte/conte.service';
-import { Button } from 'src/app/models/inputs/button';
-import { CittadinoService } from 'src/app/services/cittadino/cittadino.service';
+import { Checkbox } from '../../../app/models/inputs/checkbox';
+import { Select } from '../../../app/models/inputs/select';
+import { Zona } from '../../../app/enums/zona.enum';
+import { ConteService } from '../../../app/services/conte/conte.service';
+import { Button } from '../../../app/models/inputs/button';
+import { CittadinoService } from '../../../app/services/cittadino/cittadino.service';
 
 describe('CinaComponent', () => {
   let component: CinaComponent;
