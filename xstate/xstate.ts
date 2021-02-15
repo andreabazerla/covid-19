@@ -76,9 +76,7 @@ const covid19Machine = Machine({
           on: {
             PANDEMIA_TRUE: {
               target: 'pandemiaTrue',
-              actions: [
-                'setPandemiaEnableTrue',
-              ]
+              actions: 'setPandemiaEnableTrue'
             }
           }
         },
@@ -86,9 +84,7 @@ const covid19Machine = Machine({
           on: {
             PANDEMIA_FALSE: {
               target: 'pandemiaFalse',
-              actions: [
-                'setPandemiaEnableFalse',
-              ]
+              actions: 'setPandemiaEnableFalse'
             }
           }
         }
@@ -102,9 +98,7 @@ const covid19Machine = Machine({
             '': {
               target: 'vaccinoFalse',
               cond: isPandemiaTrue,
-              actions: [
-                'setVaccinoEnableFalse'
-              ]
+              actions: 'setVaccinoEnableFalse'
             }
           }
         },
@@ -112,16 +106,12 @@ const covid19Machine = Machine({
           on: {
             VACCINO_TRUE: {
               target: 'vaccinoTrue',
-              actions: [
-                'setVaccinoDisableTrue',
-              ]
+              actions: 'setVaccinoDisableTrue'
             },
             '': {
               target: 'vaccinoDisable',
               cond: isPandemiaFalse,
-              actions: [
-                'setVaccinoDisableFalse'
-              ]
+              actions: 'setVaccinoDisableFalse'
             }
           }
         },
@@ -206,9 +196,7 @@ const covid19Machine = Machine({
               on: {
                 UNIVERSITA_CLICK: {
                   target: 'universitaEnable',
-                  actions: [
-                    'fuoriCasa',
-                  ]
+                  actions: 'goFuoriCasa'
                 },
                 '': {
                   target: 'universitaDisable',
@@ -233,9 +221,7 @@ const covid19Machine = Machine({
               on: {
                 FARMACIA_CLICK: {
                   target: 'farmaciaEnable',
-                  actions: [
-                    'buyMascherine',
-                  ]
+                  actions: 'buyMascherine'
                 },
                 '': {
                   target: 'farmaciaDisable',
@@ -254,9 +240,7 @@ const covid19Machine = Machine({
                   {
                     target: 'caneEnable',
                     cond: isCaneClickable,
-                    actions: [
-                      'fuoriCasa'
-                    ]
+                    actions: 'goFuoriCasa'
                   }
                 ],
                 '': {
@@ -284,9 +268,7 @@ const covid19Machine = Machine({
                   {
                     target: 'ufficioEnable',
                     cond: isUfficioClickable,
-                    actions: [
-                      'fuoriCasa'
-                    ]
+                    actions: 'goFuoriCasa'
                   }
                 ],
                 '': {
@@ -314,9 +296,7 @@ const covid19Machine = Machine({
                   {
                     target: 'barEnable',
                     cond: isBarClickable,
-                    actions: [
-                      'fuoriCasa'
-                    ]
+                    actions: 'goFuoriCasa'
                   }
                 ],
                 '': {
@@ -390,7 +370,7 @@ const covid19Machine = Machine({
         }
       }
     }),
-    fuoriCasa: assign({
+    goFuoriCasa: assign({
       mascherine: (context, event) => {
         if (context.pandemia.value == Value.TRUE &&
             context.vaccino.value != Value.TRUE && context.mascherine > 0) {
