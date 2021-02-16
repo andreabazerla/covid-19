@@ -9,11 +9,11 @@ export class LoggerService {
 
   constructor() {}
 
-  addLog(log: string) {
+  addLog(log: string): void {
     this.logs.push(new Log(this.logs.length, this.getDateTime(), log));
   }
 
-  clearLogs() {
+  clearLogs(): void {
     this.logs = [];
   }
 

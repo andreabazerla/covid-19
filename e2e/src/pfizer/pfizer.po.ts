@@ -1,11 +1,11 @@
 import { browser, by, element } from 'protractor';
 
-export class AppPage {
+export class PfizerPage {
   async navigateTo(): Promise<unknown> {
-    return browser.get(browser.baseUrl);
+    return browser.get(browser.baseUrl + 'pfizer');
   }
 
   async getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText();
+    return element(by.css('h1')).getText();
   }
 }
