@@ -21,9 +21,9 @@
 <!-- TODO: convertire button in mat-button -->
 <p>{{ labelActions }}:</p>
 <form [formGroup]="actions">
-  <button type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>{{ buttonUniversita }}</button>&nbsp;
+  <button class="button-universita" type="button" formControlName="universita" (click)="goUniversita()" ngDefaultControl>{{ buttonUniversita }}</button>&nbsp;
   <button class="button-farmacia" type="button" formControlName="farmacia" (click)="goFarmacia()" ngDefaultControl>{{ buttonFarmacia }}</button>&nbsp;
-  <button type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>{{ buttonCane }}</button>&nbsp;
-  <button type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>{{ buttonUfficio }}</button>&nbsp;
-  <button type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>{{ buttonBar }}</button>&nbsp;
+  <button class="button-cane" type="button" formControlName="cane" (click)="goCane()" ngDefaultControl>{{ buttonCane }}</button>&nbsp;
+  <button class="button-ufficio" type="button" formControlName="ufficio" (click)="goUfficio()" ngDefaultControl>{{ buttonUfficio }}</button>&nbsp;
+  <button class="button-bar" type="button" formControlName="bar" (click)="goBar()" ngDefaultControl>{{ buttonBar }}</button>&nbsp;
 </form>

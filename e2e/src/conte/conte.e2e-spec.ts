@@ -1,23 +1,23 @@
 import { browser, by, element, logging } from 'protractor';
-import { CinaPage } from './cina.po';
+import { ContePage } from './conte.po';
 
-describe('Cina', () => {
-  let page: CinaPage;
+describe('Conte', () => {
+  let page: ContePage;
 
   beforeEach(() => {
-    page = new CinaPage();
+    page = new ContePage();
   });
 
-  it('should display cina title', async () => {
+  it('should display conte title', async () => {
     await browser.sleep(250);
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('Cina');
+    expect(await page.getTitleText()).toEqual('Conte');
   });
 
-  it('should pandemia checkbox to be enable and false', async () => {
-    const checkboxPandemia = await element(by.css('input'));
-    expect(checkboxPandemia.isEnabled()).toBeTruthy();
-    expect(checkboxPandemia.isSelected()).toBeTruthy();
+  it('should zona select to be disable and empty', async () => {
+    const selectZona = await element(by.css('select'));
+    expect(selectZona.isEnabled()).toBeFalsy();
+    expect(selectZona.getText()).toBe('');
   });
 
   afterEach(async () => {
