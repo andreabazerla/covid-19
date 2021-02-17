@@ -2,9 +2,9 @@
 
 <label>
   {{ labelZona }}:
-  <select [formControl]="zona" #zonaSelect (click)="setZona(zonaSelect.value)">
-    <option value="gialla">{{ optionZonaGialla }}</option>
-    <option value="arancione">{{ optionZonaArancione }}</option>
-    <option value="rossa">{{ optionZonaRossa }}</option>
+  <select class="select-zona" [formControl]="zona" #zonaSelect (click)="setZona(zonaSelect.value)">
+    <option class="option-gialla" value="gialla">{{ optionZonaGialla }}</option>
+    <option class="option-arancione" value="arancione">{{ optionZonaArancione }}</option>
+    <option class="option-rossa" value="rossa">{{ optionZonaRossa }}</option>
   </select>
 </label>
