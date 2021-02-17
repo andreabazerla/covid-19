@@ -9,45 +9,270 @@ describe('Cittadino', () => {
   });
 
   it('should display cittadino title', async () => {
-    await browser.sleep(250);
-    await page.navigateTo();
+    await browser.sleep(500);
+    await page.navigateTo('cittadino');
+    await browser.sleep(500);
     expect(await page.getTitleText()).toEqual('Cittadino');
   });
 
   it('should zona select to be disable and empty', async () => {
-    const selectZona = await element(by.css('select'));
-    expect(selectZona.isEnabled()).toBeFalsy();
-    expect(selectZona.getText()).toBe('');
+    expect(await element(by.css('select')).isEnabled()).toBe(false);
+
+    const optionGialla = await element(by.css('.option-gialla'));
+    const optionArancione = await element(by.css('.option-arancione'));
+    const optionRossa = await element(by.css('.option-rossa'));
+
+    expect(optionGialla.isSelected()).toBeTruthy();
+    expect(optionArancione.isSelected()).toBeFalsy()
+    expect(optionRossa.isSelected()).toBeFalsy();
   });
 
   it('should mascherine text to be zero', async () => {
-    const mascherine = await element(by.css('.mascherine'));
-    expect(mascherine.getText()).toBe('0');
+    expect(await element(by.css('.mascherine')).getText()).toBe('0');
   });
 
   it('should universita button to be enable', async () => {
-    const buttonUniversita = await element(by.css('.button-universita'));
-    expect(buttonUniversita.isEnabled()).toBeTruthy();
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(true);
   });
 
   it('should farmacia button to be disable', async () => {
-    const buttonFarmacia = await element(by.css('.button-farmacia'));
-    expect(buttonFarmacia.isEnabled()).toBeFalsy();
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(false);
   });
 
   it('should cane button to be enable', async () => {
-    const buttonCane = await element(by.css('.button-cane'));
-    expect(buttonCane.isEnabled()).toBeTruthy();
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
   });
 
   it('should ufficio button to be enable', async () => {
-    const buttonUfficio = await element(by.css('.button-ufficio'));
-    expect(buttonUfficio.isEnabled()).toBeTruthy();
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(true);
   });
 
   it('should bar button to be enable', async () => {
-    const buttonBar = await element(by.css('.button-bar'));
-    expect(buttonBar.isEnabled()).toBeTruthy();
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(true);
+  });
+
+  it('should cane, ufficio and bar buttons enable with mascherine grather than 0 else disable with zona setted to gialla', async () => {
+    await page.routeTo('cina');
+    await browser.sleep(500);
+
+    const checkboxPandemia = await element(by.css('input'));
+    checkboxPandemia.click();
+    await browser.sleep(500);
+    expect(checkboxPandemia.isSelected()).toBeTruthy();
+
+    await page.routeTo('cittadino');
+    await browser.sleep(500);
+
+    await element(by.css('.button-farmacia')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('10');
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(true);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('9');
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(true);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+  });
+
+  it('should cane, ufficio buttons enable with mascherine grather than 0 else disable with zona setted to arancione', async () => {
+    await page.routeTo('conte');
+    await browser.sleep(500);
+
+    const optionArancione = await element(by.css('.option-arancione'));
+    await optionArancione.click();
+    await browser.sleep(500);
+
+    expect(optionArancione.isSelected()).toBeTruthy();
+
+    await page.routeTo('cittadino');
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-farmacia')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('10');
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('9');
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+  });
+
+  it('should only cane button enable with mascherine grather than 0 with zona setted to rossa', async () => {
+    await page.routeTo('conte');
+    await browser.sleep(500);
+
+    const optionRossa = await element(by.css('.option-rossa'));
+    await optionRossa.click();
+    await browser.sleep(500);
+
+    expect(optionRossa.isSelected()).toBeTruthy();
+
+    await page.routeTo('cittadino');
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-farmacia')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('10');
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.mascherine')).getText()).toEqual('9');
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(100);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
+
+    await element(by.css('.button-cane')).click();
+    await browser.sleep(500);
+
+    expect(await element(by.css('.button-universita')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-farmacia')).isEnabled()).toBe(true);
+    expect(await element(by.css('.button-cane')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-ufficio')).isEnabled()).toBe(false);
+    expect(await element(by.css('.button-bar')).isEnabled()).toBe(false);
   });
 
   afterEach(async () => {
